@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="certificadoCurso" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6eedf50d-70ef-4765-946c-8f388cf7ad33">
+	<property name="ireport.background.image" value="C:\Users\PET BSI\Desktop\backgroundIF.jpg"/>
+	<property name="ireport.background.image.properties" value="true,true,0.25,65,-7,0,0,728,514"/>
+	<property name="ireport.zoom" value="0.75"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_curso" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="NomeAluno" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT curso.`nome` AS curso_nome, curso.`carga_horaria` AS curso_carga_horaria, curso.`data` AS curso_data FROM `curso` curso where curso.id = 1]]>
+	</queryString>
+	<field name="curso_nome" class="java.lang.String"/>
+	<field name="curso_carga_horaria" class="java.lang.Integer"/>
+	<field name="curso_data" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="105" splitType="Stretch">
+			<image>
+				<reportElement x="511" y="0" width="291" height="100" uuid="0bc7602d-3576-44ad-aaf5-374d841660a1"/>
+				<imageExpression><![CDATA["C:\\Users\\PET BSI\\Desktop\\logo pet preto e branco.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="58" splitType="Stretch">
+			<staticText>
+				<reportElement x="261" y="0" width="280" height="55" uuid="0d71217e-86cd-4b29-85b0-d4b3d150724b"/>
+				<textElement>
+					<font size="40"/>
+				</textElement>
+				<text><![CDATA[CERTIFICADO]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="170" splitType="Stretch">
+			<textField>
+				<reportElement x="12" y="0" width="757" height="170" uuid="50772777-4941-4bb4-b2a8-7062958f14ff"/>
+				<textElement textAlignment="Justified">
+					<font size="28" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Certificamos que "+$P{NomeAluno}.toUpperCase()+" concluiu com êxito o minicurso \""+$F{curso_nome}+"\" promovido pelo PET, em "+ $F{curso_data} +", com carga horária de "+ $F{curso_carga_horaria} +" horas."]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="33" width="100" height="20" uuid="5a707d92-56f3-4d26-a337-2e4d54a5537a"/>
+				<textFieldExpression><![CDATA["Numero de validação: "]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM">
+				<reportElement x="351" y="17" width="100" height="20" uuid="e8b9c9a0-5991-4a5c-a940-3cdc2b7823d2"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Juiz de Fora, "+ new java.text.SimpleDateFormat("dd").format(new java.util.Date())+" de "+new java.text.SimpleDateFormat("MMMMM").format(new java.util.Date())+" de "+new java.text.SimpleDateFormat("yyyy").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
