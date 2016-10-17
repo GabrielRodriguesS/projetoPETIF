@@ -11,21 +11,21 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
-        <title>Projeto PET v1.0</title>
+        <title>Projeto PET v1.2.0</title>
     </head>
     <body>
         <h3>Utilidades PET!</h3>
-        
-        <a href="sitePET?comando=chamaListaCursos">Criar lista de presença</a> <br>
-            <a href="sitePET?comando=chamaSalvarLista">Salvar lista de presença</a> <br>
-            <a href="sitePET?comando=validarCertificado">Validar certificado</a> <br>
-            <a href="sitePET?comando=gerarCertificado">Gerar certificado</a>
 
-            <c:choose>
-                <c:when test="${pagina != null}">
-                    <c:import url="${pagina}.jsp"></c:import>
-                </c:when>
-            </c:choose>
-        
+        <a href="sitePET?comando=chamaListaCursos&gerarOuSalvarLista=Gerar">Criar lista de presença</a> <br>
+        <a href="sitePET?comando=chamaListaCursos&gerarOuSalvarLista=Salvar">Salvar lista de presença</a> <br>
+        <a href="sitePET?comando=validarCertificado">Validar certificado</a> <br>
+        <a href="sitePET?comando=gerarCertificado">Gerar certificado</a>
+
+        <c:choose>
+            <c:when test="${pagina != null}">
+                <c:import url="${pagina}.jsp"></c:import>
+            </c:when>
+        </c:choose>
+
     </body>
 </html>

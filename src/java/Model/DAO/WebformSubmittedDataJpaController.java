@@ -158,7 +158,7 @@ public class WebformSubmittedDataJpaController implements Serializable {
                 Query q = em.createNativeQuery(sqlBuscaNomes);
                 pessoasInscritas = q.getResultList();
             } catch (EntityNotFoundException enfe) {
-                System.out.println("Erro");
+                Logger.getLogger(ControllerPet.class.getName()).log(Level.SEVERE, null, enfe);
             }
             em.getTransaction().commit();
         } finally {
@@ -167,6 +167,10 @@ public class WebformSubmittedDataJpaController implements Serializable {
             }
         }
         return pessoasInscritas;
+    }
+
+    public Integer countAllInscritos(String nomeCurso) {
+        return this.getAllInscritos(nomeCurso).size();
     }
 
     //cid 20 é o campo do bd que tem os nomes dos cursos;

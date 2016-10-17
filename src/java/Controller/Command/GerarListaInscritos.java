@@ -21,7 +21,7 @@ import util.Command.Command;
  *
  * @author PET BSI
  */
-public class CriarListaInscritos implements Command {
+public class GerarListaInscritos implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

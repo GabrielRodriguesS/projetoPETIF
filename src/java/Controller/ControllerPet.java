@@ -2,7 +2,8 @@ package Controller;
 
 import Controller.Command.ChamaListaCursos;
 import Controller.Command.ChamaSalvarLista;
-import Controller.Command.CriarListaInscritos;
+import Controller.Command.SalvarLista;
+import Controller.Command.GerarListaInscritos;
 import Controller.Command.NoCommand;
 import java.io.IOException;
 import java.util.HashMap;
@@ -24,10 +25,11 @@ public class ControllerPet extends HttpServlet {
     private static final Map<String, Command> commandsMap = new HashMap<>();
 
     static {
-        commandsMap.put("criaLista", new CriarListaInscritos());//Cria lista de inscritos
-        commandsMap.put("chamaSalvarLista", new ChamaSalvarLista());//Cria lista de inscritos
-        commandsMap.put("chamaListaCursos", new ChamaListaCursos());//Cria lista de inscritos
-        commandsMap.put("noCommand", new NoCommand());//chamada de comandos serrado
+        commandsMap.put("gerarLista", new GerarListaInscritos());//Cria lista de inscritos
+        commandsMap.put("salvarLista", new ChamaSalvarLista());//Chama a pagina para inserir os dados do curso dado e os inscritos
+        commandsMap.put("salvarInscritos", new SalvarLista());//Salva lista de presentes no curso
+        commandsMap.put("chamaListaCursos", new ChamaListaCursos());//Chama a pagina com os cursos existentes
+        commandsMap.put("noCommand", new NoCommand());//chamada de comandos errado e pagina de erros
     }
 
     public static Command get(String commandName) {

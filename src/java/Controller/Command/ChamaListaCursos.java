@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controller.Command;
 
 import Model.DAO.WebformSubmittedDataJpaController;
@@ -23,6 +18,7 @@ public class ChamaListaCursos implements Command{
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("projetoPETPU");
         WebformSubmittedDataJpaController dao = new WebformSubmittedDataJpaController(emf);
         request.setAttribute("nomeDoscursos", dao.getAllCursos());
+        request.setAttribute("gerarOuSalvarLista", request.getParameter("gerarOuSalvarLista"));
         return "listaCursos";
     }
 
