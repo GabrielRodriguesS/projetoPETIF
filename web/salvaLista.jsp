@@ -5,14 +5,16 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <h4>Salvar Lista de Inscritos</h4>
 
-<form action="sitePET" method="GET">  
+<form action="sitePET" method="POST">  
 
+    Todos<input type="checkbox" id="select_all"/>
+    <label><input type="button" name="add" value="Adicionar Participante" /></label> 
+    <fieldset id="inputs_adicionais" style="border: none"> 
+        <label style="display: block"><input type="checkbox" name="check"><input type="text" name="nome" placeholder="Nome"></label>  
 
-    <label style="display: block"><input type="button" name="add" value="Add" /></label>  
-    <label style="display: block">Nome: <input type="text" name="foto[]"></label>  
-    <fieldset id="inputs_adicionais" style="border: none">  
     </fieldset>  
 
 
@@ -24,7 +26,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        var input = '<label style="display: block">Nome: <input type="text" name="foto[]" /> <a href="#" class="remove">X</a></label>';
+        var input = '<label style="display: block"><input type="checkbox" name="check" /><input type="text" name="nome" placeholder="Nome"/> <a href="#" class="remove" style="color:red">X</a></label>';
         $("input[name='add']").click(function (e) {
             $('#inputs_adicionais').append(input);
         });
@@ -32,6 +34,15 @@
         $('#inputs_adicionais').delegate('a', 'click', function (e) {
             e.preventDefault();
             $(this).parent('label').remove();
+        });
+
+        $('#select_all').change(function () {
+            var checkboxes = $(this).closest('form').find(':checkbox');
+            if ($(this).is(':checked')) {
+                checkboxes.prop('checked', true);
+            } else {
+                checkboxes.prop('checked', false);
+            }
         });
 
     });
