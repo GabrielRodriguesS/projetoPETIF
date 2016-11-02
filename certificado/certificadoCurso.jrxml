@@ -23,8 +23,8 @@
 	<title>
 		<band height="105" splitType="Stretch">
 			<image>
-				<reportElement x="511" y="0" width="291" height="100" uuid="0bc7602d-3576-44ad-aaf5-374d841660a1"/>
-				<imageExpression><![CDATA["C:\\Users\\PET BSI\\Desktop\\logo pet preto e branco.jpg"]]></imageExpression>
+				<reportElement x="511" y="2" width="291" height="100" uuid="0bc7602d-3576-44ad-aaf5-374d841660a1"/>
+				<imageExpression><![CDATA["~\\projetoPETIF\\certificado\\logoPet.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</title>

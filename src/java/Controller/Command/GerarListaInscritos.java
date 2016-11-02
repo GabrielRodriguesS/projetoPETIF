@@ -1,14 +1,12 @@
 package Controller.Command;
 
-import Model.DAO.WebformSubmittedDataJpaController;
 import com.mysql.jdbc.Connection;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.JRException;
@@ -34,19 +32,30 @@ public class GerarListaInscritos implements Command {
     }
 
     private byte[] getRelatorio(Object nomeCurso) throws JRException, FileNotFoundException, SQLException {
-        String path = this.getClass().getClassLoader().getResource("").getPath() + "..\\..\\relatorios\\listaInscritos.jasper";
-
+        String path = this.getClass().getClassLoader().getResource("").getPath() + ".." + File.separator + ".." + File.separator + "relatorios" + File.separator + "listaInscritos.jasper";
         Map<String, Object> parametros = new HashMap<>();
-        parametros.put("nomeCurso", nomeCurso);
+        byte[] relatorio = null;
 
-        JasperPrint jp = JasperFillManager.fillReport(path, parametros, this.getConexao());
-        byte[] relatorio = JasperExportManager.exportReportToPdf(jp);
+        if (path.contains("%20")) {
+            path = path.replace("%20", " ");
+        }
+        try {
+            parametros.put("nomeCurso", nomeCurso);
+            JasperPrint jp = JasperFillManager.fillReport(path, parametros, this.getConexao());
+            relatorio = JasperExportManager.exportReportToPdf(jp);
+        } catch (JRException | SQLException e) {
+            throw e;
+        }
         return relatorio;
     }
 
     private Connection getConexao() throws SQLException {
-        Connection conexao;
-        conexao = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/petredesinternet?zeroDateTimeBehavior=convertToNull", "root", "");
+        Connection conexao = null;
+        try {
+            conexao = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/petredesinternet?zeroDateTimeBehavior=convertToNull", "root", "");
+        } catch (SQLException e) {
+            throw e;
+        }
         return conexao;
     }
 }

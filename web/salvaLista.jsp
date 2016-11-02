@@ -8,13 +8,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <h4>Salvar Lista de Inscritos</h4>
 
+<p>Envie apenas os nomes dos inscritos que compareceram ao minicurso</p>
+
 <form action="sitePET" method="POST">  
 
-    Todos<input type="checkbox" id="select_all"/>
     <label><input type="button" name="add" value="Adicionar Participante" /></label> 
     <fieldset id="inputs_adicionais" style="border: none"> 
-        <label style="display: block"><input type="checkbox" name="check"><input type="text" name="nome" placeholder="Nome"></label>  
-
+        <c:forEach items="${alunosInscritos}" var="nomeInscrito">
+            <label style="display: block">
+                <input type="text" name="nome" placeholder="Nome" value="${nomeInscrito}" />
+                <a href="#" class="remove" style="color:red">X</a>
+            </label>
+        </c:forEach>
     </fieldset>  
 
 
@@ -26,7 +31,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        var input = '<label style="display: block"><input type="checkbox" name="check" /><input type="text" name="nome" placeholder="Nome"/> <a href="#" class="remove" style="color:red">X</a></label>';
+        var input = '<label style="display: block"><input type="text" name="nome" placeholder="Nome"/> <a href="#" class="remove" style="color:red">X</a></label>';
         $("input[name='add']").click(function (e) {
             $('#inputs_adicionais').append(input);
         });
@@ -35,15 +40,5 @@
             e.preventDefault();
             $(this).parent('label').remove();
         });
-
-        $('#select_all').change(function () {
-            var checkboxes = $(this).closest('form').find(':checkbox');
-            if ($(this).is(':checked')) {
-                checkboxes.prop('checked', true);
-            } else {
-                checkboxes.prop('checked', false);
-            }
-        });
-
     });
 </script>
