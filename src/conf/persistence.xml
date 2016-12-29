@@ -4,6 +4,7 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>Model.WebformSubmissions</class>
     <class>Model.WebformSubmittedData</class>
+    <class>Model.Certificados</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/petredesinternet?zeroDateTimeBehavior=convertToNull"/>

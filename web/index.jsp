@@ -25,6 +25,9 @@
             <c:when test="${pagina != null}">
                 <c:import url="${pagina}.jsp"></c:import>
             </c:when>
+            <c:when test="${mensagem != null}">
+                <br><p><c:out value="${mensagem}"></c:out></p>
+            </c:when>
         </c:choose>
 
     </body>

@@ -24,6 +24,7 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "WebformSubmittedData.findAll", query = "SELECT w FROM WebformSubmittedData w")})
 public class WebformSubmittedData implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected WebformSubmittedDataPK webformSubmittedDataPK;
@@ -88,5 +89,5 @@ public class WebformSubmittedData implements Serializable {
     public String toString() {
         return "Model.WebformSubmittedData[ webformSubmittedDataPK=" + webformSubmittedDataPK + " ]";
     }
-    
+
 }

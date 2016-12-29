@@ -8,6 +8,7 @@ import Model.WebformSubmittedDataPK;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -193,5 +194,40 @@ public class WebformSubmittedDataJpaController implements Serializable {
             }
         }
         return cursosExistentes;
+    }
+
+    public List getAllSid(String nomeCurso) {
+        String sqlBuscaSid = "SELECT sid FROM `webform_submitted_data` WHERE sid in \n"
+                + "(select sid FROM `webform_submitted_data` WHERE cid=20 and data like"
+                + " \"" + nomeCurso + "\") and cid = 1";
+        EntityManager em = null;
+        List<String> sidPessoasInscritas = new ArrayList();
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            try {
+                Query q = em.createNativeQuery(sqlBuscaSid);
+                sidPessoasInscritas = q.getResultList();
+            } catch (EntityNotFoundException enfe) {
+                Logger.getLogger(ControllerPet.class.getName()).log(Level.SEVERE, null, enfe);
+            }
+            em.getTransaction().commit();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        return sidPessoasInscritas;
+    }
+
+    public TreeMap getAllSidAndInscritos(String nomeCurso, List<String> inscritos) {
+        List sid = this.getAllSid(nomeCurso);
+        TreeMap sidAndInscritos = new TreeMap();
+        int posicao = sid.size();
+        for (int i = posicao; i > 0; i--) {
+            posicao--;
+            sidAndInscritos.put(inscritos.get(posicao), sid.get(posicao));
+        }
+        return sidAndInscritos;
     }
 }

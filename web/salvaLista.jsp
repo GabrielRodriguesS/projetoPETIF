@@ -6,12 +6,20 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<h4>Salvar Lista de Inscritos</h4>
-
-<p>Envie apenas os nomes dos inscritos que compareceram ao minicurso</p>
+<h4>Salvar Lista de Inscritos do Curso ${nomeCurso}</h4>
 
 <form action="sitePET" method="POST">  
+    <p>Nome do Curso</p>
+    <input type="text" name="nomeCursoAlterado" value="${nomeCurso}" /> *Altere só se necessário
+    
+    <p>Data em que o curso ocorreu:</p>
+    <input type="date" name="dataCurso" max="${dataMaxima}" required />
 
+    <p>Carga horária estimada (em horas):</p>
+    <input type="number" name="cargaHoraria" placeholder="2" min="0" required />
+
+    <p>*Envie apenas os nomes dos inscritos que compareceram ao minicurso
+    *Escreva corretamente o nome dos inscritos, pois será assim que eles serão impressos no certificado</p>
     <label><input type="button" name="add" value="Adicionar Participante" /></label> 
     <fieldset id="inputs_adicionais" style="border: none"> 
         <c:forEach items="${alunosInscritos}" var="nomeInscrito">
