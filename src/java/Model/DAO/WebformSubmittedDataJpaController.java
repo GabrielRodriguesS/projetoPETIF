@@ -206,6 +206,7 @@ public class WebformSubmittedDataJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             try {
+                
                 Query q = em.createNativeQuery(sqlBuscaSid);
                 sidPessoasInscritas = q.getResultList();
             } catch (EntityNotFoundException enfe) {

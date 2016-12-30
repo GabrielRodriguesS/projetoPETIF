@@ -5,10 +5,14 @@
  */
 package Model.DAO;
 
+import Controller.ControllerPet;
 import Model.Certificados;
 import Model.DAO.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
@@ -77,8 +81,8 @@ public class CertificadosJpaController implements Serializable {
             try {
                 certificados = em.getReference(Certificados.class, id);
                 certificados.getId();
-            } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The certificados with id " + id + " no longer exists.", enfe);
+            } catch (EntityNotFoundException e) {
+                throw new NonexistentEntityException("The certificados with id " + id + " no longer exists.", e);
             }
             em.remove(certificados);
             em.getTransaction().commit();
@@ -134,5 +138,26 @@ public class CertificadosJpaController implements Serializable {
             em.close();
         }
     }
-    
+
+    public boolean findByNumeroCertificado(String numeroCertificado) {
+        String sqlBuscaNumCertificado = "SELECT * FROM `certificados` WHERE numero_certificado like \"" + numeroCertificado + "\"";
+        EntityManager em = null;
+        int certificado = 0;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            try {
+                Query q = em.createNativeQuery(sqlBuscaNumCertificado);
+                certificado = q.getFirstResult();
+            } catch (EntityNotFoundException e) {
+                Logger.getLogger(ControllerPet.class.getName()).log(Level.SEVERE, null, e);
+            }
+            em.getTransaction().commit();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        return certificado != 0;
+    }
 }

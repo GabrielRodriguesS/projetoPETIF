@@ -2,9 +2,11 @@ package Controller;
 
 import Controller.Command.ChamaListaCursos;
 import Controller.Command.ChamaSalvarLista;
+import Controller.Command.ChamaValidarCertificado;
 import Controller.Command.SalvarLista;
 import Controller.Command.GerarListaInscritos;
 import Controller.Command.NoCommand;
+import Controller.Command.ValidarCertificado;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -28,6 +30,8 @@ public class ControllerPet extends HttpServlet {
         commandsMap.put("gerarLista", new GerarListaInscritos());//Cria lista de inscritos
         commandsMap.put("salvarLista", new ChamaSalvarLista());//Chama a pagina para inserir os dados do curso dado e os inscritos
         commandsMap.put("salvarInscritos", new SalvarLista());//Salva lista de presentes no curso
+        commandsMap.put("chamaValidarCertificado", new ChamaValidarCertificado());//Valida Certificado e da opção de gerar novamente
+        commandsMap.put("validarCertificado", new ValidarCertificado());//Valida Certificado e da opção de gerar novamente
         commandsMap.put("chamaListaCursos", new ChamaListaCursos());//Chama a pagina com os cursos existentes
         commandsMap.put("noCommand", new NoCommand());//chamada de comandos errado e pagina de erros
     }

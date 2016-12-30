@@ -18,7 +18,7 @@
 
         <a href="sitePET?comando=chamaListaCursos&gerarOuSalvarLista=Gerar">Criar lista de presença</a> <br>
         <a href="sitePET?comando=chamaListaCursos&gerarOuSalvarLista=Salvar">Salvar lista de presença</a> <br>
-        <a href="sitePET?comando=validarCertificado">Validar certificado</a> <br>
+        <a href="sitePET?comando=chamaValidarCertificado">Validar certificado</a> <br>
         <a href="sitePET?comando=gerarCertificado">Gerar certificado</a>
 
         <c:choose>

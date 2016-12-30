@@ -18,7 +18,7 @@
     <p>Carga horária estimada (em horas):</p>
     <input type="number" name="cargaHoraria" placeholder="2" min="0" required />
 
-    <p>*Envie apenas os nomes dos inscritos que compareceram ao minicurso
+    <p>*Envie apenas os nomes dos inscritos que compareceram ao minicurso <br>
     *Escreva corretamente o nome dos inscritos, pois será assim que eles serão impressos no certificado</p>
     <label><input type="button" name="add" value="Adicionar Participante" /></label> 
     <fieldset id="inputs_adicionais" style="border: none"> 
@@ -38,10 +38,11 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.1.min.js"></script>  
 <script type="text/javascript">
     $(document).ready(function () {
-
-        var input = '<label style="display: block"><input type="text" name="nome" placeholder="Nome"/> <a href="#" class="remove" style="color:red">X</a></label>';
+        n = $("input[name='nome']").length;
+        var input = '<label style="display: block"><input type="text" name="nome" id="participante'+ n +'" placeholder="Nome"/> <a href="#" class="remove" style="color:red">X</a></label>';
         $("input[name='add']").click(function (e) {
             $('#inputs_adicionais').append(input);
+             $('input[id=participante'+n+']').focus();
         });
 
         $('#inputs_adicionais').delegate('a', 'click', function (e) {

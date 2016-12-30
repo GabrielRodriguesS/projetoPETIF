@@ -1,5 +1,6 @@
 package Controller.Command;
 
+import Model.DAO.Dao;
 import com.mysql.jdbc.Connection;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -41,7 +42,7 @@ public class GerarListaInscritos implements Command {
         }
         try {
             parametros.put("nomeCurso", nomeCurso);
-            JasperPrint jp = JasperFillManager.fillReport(path, parametros, this.getConexao());
+            JasperPrint jp = JasperFillManager.fillReport(path, parametros, Dao.getConnection());
             relatorio = JasperExportManager.exportReportToPdf(jp);
         } catch (JRException | SQLException e) {
             throw e;
@@ -49,13 +50,4 @@ public class GerarListaInscritos implements Command {
         return relatorio;
     }
 
-    private Connection getConexao() throws SQLException {
-        Connection conexao = null;
-        try {
-            conexao = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/petredesinternet?zeroDateTimeBehavior=convertToNull", "root", "");
-        } catch (SQLException e) {
-            throw e;
-        }
-        return conexao;
-    }
 }
