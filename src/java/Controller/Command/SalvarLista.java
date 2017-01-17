@@ -7,6 +7,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,14 +25,21 @@ public class SalvarLista implements Command {
         try {
             String nomesInscritos[] = request.getParameterValues("nome");
             CertificadosJpaController dao = Dao.getDaoCertificado();
-            Certificados certificado;
+            ArrayList<Certificados> todosIncritos = new ArrayList();
+            Certificados inscrito;
+            Integer idCertificado;
             for (Object nomeInscrito : nomesInscritos) {
-                certificado = getParametros(request);
-                certificado.setNome(encodeString(nomeInscrito.toString()));
-                certificado.setNumeroCertificado(getNumeroCertificado(dao.getCertificadosCount()));
-                saveCertificado(certificado, dao);
+                inscrito = getParametros(request);
+                inscrito.setNome(encodeString(nomeInscrito.toString()));
+                idCertificado = dao.getCertificadosCount();
+                inscrito.setNumeroCertificado(getNumeroCertificado(idCertificado));
+                saveCertificado(inscrito, dao);
+                inscrito.setId(idCertificado++);
+                todosIncritos.add(inscrito);
             }
             request.setAttribute("mensagem", "Lista salva com sucesso!");
+            request.setAttribute("salvarTodosCertificados", true);
+            request.getSession().getServletContext().setAttribute("todosInscritos", todosIncritos);
         } catch (Exception e) {
             request.setAttribute("mensagem", "Ocorreram problemas ao salvar a lista. :/");
             throw e;

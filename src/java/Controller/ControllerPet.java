@@ -1,8 +1,10 @@
 package Controller;
 
+import Controller.Command.ChamaGerarCertificado;
 import Controller.Command.ChamaListaCursos;
 import Controller.Command.ChamaSalvarLista;
 import Controller.Command.ChamaValidarCertificado;
+import Controller.Command.GerarCertificado;
 import Controller.Command.SalvarLista;
 import Controller.Command.GerarListaInscritos;
 import Controller.Command.NoCommand;
@@ -28,7 +30,9 @@ public class ControllerPet extends HttpServlet {
 
     static {
         commandsMap.put("gerarLista", new GerarListaInscritos());//Cria lista de inscritos
+        commandsMap.put("gerarCertificado", new GerarCertificado());//Cria lista de inscritos
         commandsMap.put("salvarLista", new ChamaSalvarLista());//Chama a pagina para inserir os dados do curso dado e os inscritos
+        commandsMap.put("gerarCertificado", new ChamaGerarCertificado());//Chama a pagina para gerar certificados
         commandsMap.put("salvarInscritos", new SalvarLista());//Salva lista de presentes no curso
         commandsMap.put("chamaValidarCertificado", new ChamaValidarCertificado());//Valida Certificado e da opção de gerar novamente
         commandsMap.put("validarCertificado", new ValidarCertificado());//Valida Certificado e da opção de gerar novamente

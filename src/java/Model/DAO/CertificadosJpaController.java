@@ -10,6 +10,7 @@ import Model.Certificados;
 import Model.DAO.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -159,5 +160,15 @@ public class CertificadosJpaController implements Serializable {
             }
         }
         return certificado != 0;
+    }
+
+    public List<Certificados> getCertificadosNomeData() {
+        //tem que criar um certificado para cada curso diferente no mysql
+        return null;
+    }
+
+    public List<Certificados> getAllCertificadosByDataAndNome(Date data, String nome) {
+        //pensar em metodo para retornar tds os certificados com uma data e um nome igual
+        return null;
     }
 }

@@ -35,4 +35,8 @@ public class Dao {
     public static Connection getConnection() throws SQLException {
         return (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/petredesinternet?zeroDateTimeBehavior=convertToNull", "root", "");
     }
+
+    public static void closeConnection(Connection connection) throws SQLException {
+        connection.close();
+    }
 }

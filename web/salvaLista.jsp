@@ -10,13 +10,13 @@
 
 <form action="sitePET" method="POST">  
     <p>Nome do Curso</p>
-    <input type="text" name="nomeCursoAlterado" value="${nomeCurso}" /> *Altere só se necessário
+    <input type="text" name="nomeCursoAlterado" value="${nomeCurso}" /> *Este será o nome impresso nos certificados
     
     <p>Data em que o curso ocorreu:</p>
     <input type="date" name="dataCurso" max="${dataMaxima}" required />
 
     <p>Carga horária estimada (em horas):</p>
-    <input type="number" name="cargaHoraria" placeholder="2" min="0" required />
+    <input type="number" name="cargaHoraria" placeholder="2" min="0" required /> *Dê preferencia por numeros inteiros
 
     <p>*Envie apenas os nomes dos inscritos que compareceram ao minicurso <br>
     *Escreva corretamente o nome dos inscritos, pois será assim que eles serão impressos no certificado</p>
@@ -24,7 +24,7 @@
     <fieldset id="inputs_adicionais" style="border: none"> 
         <c:forEach items="${alunosInscritos}" var="nomeInscrito">
             <label style="display: block">
-                <input type="text" name="nome" placeholder="Nome" value="${nomeInscrito}" />
+                <input type="text" name="nome" placeholder="Nome" value="${nomeInscrito}" required />
                 <a href="#" class="remove" style="color:red">X</a>
             </label>
         </c:forEach>
@@ -39,7 +39,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         n = $("input[name='nome']").length;
-        var input = '<label style="display: block"><input type="text" name="nome" id="participante'+ n +'" placeholder="Nome"/> <a href="#" class="remove" style="color:red">X</a></label>';
+        var input = '<label style="display: block"><input type="text" name="nome" id="participante'+ n +'" placeholder="Nome" required/> <a href="#" class="remove" style="color:red">X</a></label>';
         $("input[name='add']").click(function (e) {
             $('#inputs_adicionais').append(input);
              $('input[id=participante'+n+']').focus();

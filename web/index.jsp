@@ -29,6 +29,11 @@
                 <br><p><c:out value="${mensagem}"></c:out></p>
             </c:when>
         </c:choose>
+        <c:choose>
+            <c:when test="${salvarTodosCertificados}">
+                <p>Caso queira baixar todos os certificados em zip <a href="sitePET?comando=gerarCertificado">Download</a> </p>
+            </c:when>
+        </c:choose>
 
     </body>
 </html>
